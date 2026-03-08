@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@theme {
+    --color-brand-50: #eff6ff;
+    --color-brand-100: #dbeafe;
+    --color-brand-400: #60a5fa;
+    --color-brand-500: #3b82f6;
+    --color-brand-600: #2563eb;
+    --color-brand-900: #1e3a8a;
+}
+
+@utility glass-card {
+    @apply bg-white/50 backdrop-blur-xl border border-white/20 rounded-3xl shadow-xl shadow-slate-200/50;
+}
+
+.dark .glass-card {
+    @apply bg-slate-900/50 border-slate-800 shadow-none;
+}

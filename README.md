@@ -1,58 +1,45 @@
-# 🚀 VC Sales Dashboard
+# 🚀 VC Sales Dashboard (Next.js Edition)
 
-A modern, high-performance SaaS-style dashboard built with **React**, **Vite**, and **Tailwind CSS v4**. This dashboard dynamically parses sales data from a CSV file and presents key performance indicators (KPIs) and transaction logs in a premium, clean interface.
+A modern, high-performance SaaS-style dashboard built with **Next.js (App Router)** and **Tailwind CSS v4**. This dashboard dynamically parses sales data and presents KPIs using AI insights powered by Google Gemini.
 
-![Dashboard Preview](dashboard_full_view_1772951569021.png)
+It is fully prepared for Vercel deployment with Supabase.
 
-## ✨ Features
+## 📂 Architecture
 
-- **📊 Real-time Analytics**: Automatically calculates Revenue, Orders, Net Profit, and Average Order Value (AOV).
-- **🎨 Premium UI**: Glassmorphic design with subtle micro-animations, custom brand color palette, and Inter typography.
-- **🔍 Instant Search**: Filter through transactions instantly across all data fields.
-- **⚡ Built with Tailwind v4**: Utilizes the latest CSS-first configuration and lightning-fast engine.
-- **📱 Responsive Design**: Fully optimized for mobile, tablet, and desktop viewing.
+This project has been upgraded from a React SPA to a **Full-Stack Next.js Application**.
+- **Frontend**: `src/app/page.jsx`
+- **Data API**: `src/app/api/sales/route.js` (Reads from CSV or Supabase)
+- **AI Engine API**: `src/app/api/insights/route.js` (Securely calls Gemini server-side)
 
-## 🛠️ Technology Stack
+## ☁️ Setting up for Vercel
 
-- **React 19**: Modern UI component architecture.
-- **Tailwind CSS v4**: Utility-first styling with advanced CSS-first configuration.
-- **Vite 7**: Ultra-fast build tool and development server.
-- **Lucide React**: Beautifully crafted icons for modern dashboards.
-- **PapaParse**: Robust CSV parsing for client-side data handling.
+### 1. Push to GitHub
+If you haven't already, push your code to your GitHub repository:
+`https://github.com/Ada-Ace/VC-Sales-Dashboard`
 
-## 📂 Project Structure
+### 2. Connect to Vercel
+1. Log in to [Vercel](https://vercel.com).
+2. Click **Add New** -> **Project**.
+3. Import your GitHub repository (`VC-Sales-Dashboard`).
+4. Set the **Framework Preset** to `Next.js`.
+5. Set the **Root Directory** to `next-dashboard`.
 
-```text
-VC-Dashboard/
-├── dashboard/              # Frontend (React + Vite)
-│   ├── src/               # Application logic
-│   └── .env               # Frontend environment variables
-├── server/                 # Backend API (Express)
-│   ├── index.js           # API Server
-│   ├── services/          # Data Abstraction Layer
-│   └── .env               # Server environment variables
-└── sales_data.csv         # Local CSV data source
-```
+### 3. Configure Environment Variables
+In the Vercel dashboard, before clicking "Deploy", open the **Environment Variables** section and add the following keys:
 
-## 🌐 Backend API Architecture
+- `GEMINI_API_KEY`: Your Google Gemini API Key.
+- `DATA_SOURCE`: Set to `supabase` to use your live database (or `csv` to use the fallback file).
+- `SUPABASE_URL`: Your Supabase Project URL.
+- `SUPABASE_ANON_KEY`: Your Supabase Anon Key.
 
-The dashboard now utilizes a Node.js/Express backend to serve data. This provides a secure and scalable way to manage your metrics and AI integration.
-
-### Starting the Server
-1. Navigate to the server directory: `cd server`
-2. Install dependencies: `npm install`
-3. Start the server: `npm start` (Runs on `http://localhost:3001`)
+### 4. Deploy ⚡
+Click **Deploy**. Vercel will build the `next-dashboard` directory. Once complete, your project is live in production!
 
 ---
 
-## ☁️ Supabase Integration
+## ☁️ Supabase Setup guide
 
-The backend API is configured to read data from a local CSV by default, but is fully ready to connect to **Supabase** when you're ready to scale.
-
-### 1️⃣ Create Your Database
-1. Go to [Supabase](https://supabase.com/) and create a new project.
-2. In the **SQL Editor**, create the `sales_data` table by running this snippet:
-
+1. In Supabase, open the SQL Editor and run:
 ```sql
 create table sales_data (
   id uuid default gen_random_uuid() primary key,
@@ -67,56 +54,4 @@ create table sales_data (
   created_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
 ```
-
-3. **Import Data**: Move your current CSV data into this table via the **Supabase Table Editor** (simply click "Import CSV").
-
-### 2️⃣ Connect Your Dashboard
-1. Go to **Project Settings** -> **API** to get your **Project URL** and **Anon Key**.
-2. Open the `.env` file in the `/server` folder.
-3. Add your credentials and toggle the data source:
-
-```env
-DATA_SOURCE=supabase
-SUPABASE_URL=your_project_url
-SUPABASE_ANON_KEY=your_anon_key
-```
-
-### 3️⃣ Restart & Live ⚡
-Restart your development server. The API will now serve data directly from Supabase!
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- [Node.js](https://nodejs.org/) (v18 or higher recommended)
-- [npm](https://www.npmjs.com/) (comes with Node.js)
-
-### Installation
-
-1. Clone or navigate to the project directory:
-   ```bash
-   cd VC-Dashboard/dashboard
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-
-### Data Management
-
-To update the dashboard data, replace the file at:
-`dashboard/public/data/sales_data.csv`
-
-The dashboard will automatically recalculate all KPIs and update the table upon the next page refresh.
-
----
-
-*Generated by Antigravity - Powered by VC Data Engine v2.0.0*
+2. Import `sales_data.csv` into the new table. (Available at the root of the repository).

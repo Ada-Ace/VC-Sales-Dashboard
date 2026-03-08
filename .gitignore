@@ -14,6 +14,10 @@ dist/
 dist-ssr/
 *.local
 
+# Next.js build output
+.next/
+next-dashboard/.next/
+
 # Editor files
 .vscode/
 .idea/
