@@ -1,0 +1,19 @@
+# Root gitignore
+node_modules/
+.DS_Store
+*.log
+.env
+.env.*
+!.env.example
+
+# Local data files (if you want to keep data out of git)
+# sales_data.csv
+
+# Frontend build artifacts
+dist/
+dist-ssr/
+*.local
+
+# Editor files
+.vscode/
+.idea/
